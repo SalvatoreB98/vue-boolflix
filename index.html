@@ -21,14 +21,23 @@
             <button @click="searchText()">SEARCH</button>
         </header>
         <main>
-            <ol>
-                <li v-for="element in searchedArray ">
+            <ul>
+
+                <li v-for="element in movieList">
                     <div> TITOLO: <span> {{ element.title }} </span> </div>
                     <div> TITOLO ORIGINALE: <span> {{element.original_title}} </span></div>
                     <div> LINGUA <span> {{element.original_language}} </span> <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang" ></div>
                     <div> VOTO <span> {{element.vote_average}} </span></div>
                 </li>
-            </ol>
+
+                <li v-for="element in tvSerieslist "> 
+                    <div> TITOLO: <span> {{ element.name }} </span> </div>
+                    <div> TITOLO ORIGINALE: <span> {{element.original_name}} </span></div>
+                    <div> LINGUA <span> {{element.original_language}} </span> <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang" ></div>
+                    <div> VOTO <span> {{element.vote_average}} </span></div>
+                </li>
+            </ul>
+            
         </main>
     </div>
     <script src="script.js"></script>
