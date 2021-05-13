@@ -8,12 +8,29 @@
     <!-- SCRIPT AND LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="data.js"></script>
     <!-- STYLES -->
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
+    <div id=root>
+        <header>
+            <input type="text" v-model="textToSearch">
+            <button @click="searchText()">SEARCH</button>
+        </header>
+        <main>
+            <ol>
+                <li v-for="element in searchedArray ">
+                    <div> TITOLO: <span> {{ element.title }} </span> </div>
+                    <div> TITOLO ORIGINALE: <span> {{element.original_title}} </span></div>
+                    <div> LINGUA <span> {{element.original_language}} </span> <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang" ></div>
+                    <div> VOTO <span> {{element.vote_average}} </span></div>
+                </li>
+            </ol>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 

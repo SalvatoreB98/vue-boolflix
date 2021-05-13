@@ -1,0 +1,10 @@
+*{
+    box-sizing: border-box;
+}
+li{
+    padding: 15px;
+}
+.language{
+    width: 15px;
+    height: 15px;
+}
