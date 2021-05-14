@@ -9,7 +9,8 @@ const app = new Vue({
         isContentOpened: false,
         genresList: [],
         moviesChecked: false,
-        seriesChecked: false
+        seriesChecked: false,
+        isFilterOpen: false,
     },
     methods: {
         searchText() {
@@ -100,6 +101,9 @@ const app = new Vue({
         },
         closeWindow() {
             this.isContentOpened = false
+        },
+        openCloseFilters(){
+            this.isFilterOpen = !this.isFilterOpen
         }
     },
     mounted() {

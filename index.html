@@ -28,8 +28,8 @@
                 <span class="btn" @click="searchText()">SEARCH</span>
             </div>
         </header>
-        <div class="filters-header margin-top-page"> Filtra <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-chevron-right" aria-hidden="true"></i> </div>
-        <div class="filters">
+        <div @click="openCloseFilters()" class="filters-header margin-top-page"> Filtra <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-chevron-right" :class="{'fa-rotate-90' :isFilterOpen }" aria-hidden="true"></i> </div>
+        <div class="filters" :class="{'filter-open': isFilterOpen}">
             <select name="genres" id="" :size="10">
                 <option v-for="genre in genresList" value="genre.name"> {{genre.name}}</option>
             </select>
@@ -63,7 +63,7 @@
                 <!-- LISTA FILM -->
                 <li v-for="element in movieList" @click="setActiveContent(element);
                                                         getCast('movie',element.id);
-                                                        getGenresById('movie',element.id)">
+                                                        getGenresbyId('movie',element.id)">
                     <div class="img-container">
                         <img v-if="element.poster_path!==null" class="poster"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
@@ -114,7 +114,7 @@
                                 <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </span>
-                                {{element.vote_average/2}}
+                                {{(element.vote_average/2).toFixed(1)}}
                             </div>
                             <div class="overview">{{element.overview}}</div>
                         </div>
