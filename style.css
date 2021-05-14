@@ -3,6 +3,7 @@
 }
 li{
     padding: 15px;
+    display: inline-block;
 }
 .language{
     width: 15px;
