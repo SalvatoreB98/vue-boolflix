@@ -28,7 +28,7 @@
             <ul class="list-container">
                 <li v-for="element in movieList">
                     <div class="img-container">
-                        <img v-if="element.poster_path!==null"
+                        <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
                             <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>
                             <div class="specs">
@@ -50,7 +50,7 @@
                 </li>
                 <li v-for="element in tvSerieslist ">
                     <div class="img-container">
-                        <img v-if="element.poster_path!==null"
+                        <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
                         <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>    
                         <div class="specs">
