@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="data.js"></script>
     <!-- STYLES -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
@@ -25,6 +27,9 @@
             </div>
         </header>
         <main>
+            <div class="specs-window">
+                
+            </div>
             <ul class="list-container">
                 <li v-for="element in movieList">
                     <div class="img-container">
@@ -39,15 +44,16 @@
                                     {{element.original_title}}
                                 </span>
                             </div>
-                            <div> 
+                            <div>
                                 <span> {{element.original_language}} </span>
                                 <img v-if="getLang(element.original_language)"
                                     :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
                             </div>
-                            <div>
+                            <div v-if="element.vote_average > 0">
                                 <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </span>
+                                {{(element.vote_average/2).toFixed(1)}}
                             </div>
                             <div class="overview">{{element.overview}}</div>
                         </div>
@@ -60,21 +66,22 @@
                         <img class="poster" v-else src="imgs/no-poster.png" alt="">
                         <div class="specs">
                             <div> <span> <strong>{{ element.name }}</strong> </span> </div>
-                            <div v-if="element.name!=element.original_name"> 
+                            <div v-if="element.name!=element.original_name">
                                 Titolo originale:
                                 <span> {{element.original_name}} </span>
                             </div>
-                            <div> 
+                            <div>
                                 <span>
                                     {{element.original_language}}
                                 </span>
                                 <img v-if="getLang(element.original_language)"
                                     :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
                             </div>
-                            <div>
+                            <div v-if="element.vote_average > 0">
                                 <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </span>
+                                {{element.vote_average/2}}
                             </div>
                             <div class="overview">{{element.overview}}</div>
                         </div>

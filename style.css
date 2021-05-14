@@ -86,7 +86,7 @@ ul.list-container{
 }
 .overview{
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 11;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -106,7 +106,7 @@ ul.list-container{
     flex-direction: column;
 }
 .img-container:hover .poster{
-    height: 250px;
+    height: 75px;
 }
 .img-container:hover .not-avaliable{
     display: none;
