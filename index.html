@@ -33,7 +33,8 @@
                         <img v-else src="imgs/no-poster.png" alt="" class="poster">
                         <div class="specs">
                             <div> <span> <strong>{{ element.title }}</strong> </span> </div>
-                            <div v-if="element.title!=element.original_original_title">Titolo originale:
+                            <div v-if="element.title != element.original_title">
+                                Titolo originale:
                                 <span>
                                     {{element.original_title}}
                                 </span>
@@ -59,9 +60,11 @@
                         <img class="poster" v-else src="imgs/no-poster.png" alt="">
                         <div class="specs">
                             <div> <span> <strong>{{ element.name }}</strong> </span> </div>
-                            <div v-if="element.name!=element.original_name"> <span> {{element.original_name}} </span>
+                            <div v-if="element.name!=element.original_name"> 
+                                Titolo originale:
+                                <span> {{element.original_name}} </span>
                             </div>
-                            <div>
+                            <div> 
                                 <span>
                                     {{element.original_language}}
                                 </span>
