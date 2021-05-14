@@ -30,45 +30,44 @@
                     <div class="img-container">
                         <img v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
-                        <div v-else>Nessuna copertina disponibile</div>
+                            <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>
+                            <div class="specs">
+                                <div> <span> <strong>{{ element.title }}</strong> </span> </div>
+                                <div v-if="element.title!==element.original_original_title">Titolo originale: <span>
+                                        {{element.original_title}}
+                                    </span></div>
+                                <div> <span> {{element.original_language}} </span>
+                                    <img v-if="getLang(element.original_language)"
+                                        :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
+                                </div>
+                                <div>
+                                    <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
                     </div>
-                    <div class="specs">
-                        <div> <span> <strong>{{ element.title }}</strong> </span> </div>
-                        <div v-if="element.title!==element.original_original_title">Titolo originale: <span>
-                                {{element.original_title}}
-                            </span></div>
-                        <div> <span> {{element.original_language}} </span>
-                            <img v-if="getLang(element.original_language)"
-                                :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
-                        </div>
-                        <div>
-                            <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </span>
-                        </div>
-                    </div>
-
                 </li>
                 <li v-for="element in tvSerieslist ">
                     <div class="img-container">
                         <img v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
-                        <div v-else>Nessuna copertina disponibile</div>
-                    </div>
-                    <div class="specs">
-                        <div> <span> <strong>{{ element.name }}</strong> </span> </div>
-                        <div v-if="element.name!==element.original_name"> <span> {{element.original_name}} </span></div>
-                        <div>
-                            <span>
-                                {{element.original_language}}
-                            </span>
-                            <img v-if="getLang(element.original_language)"
-                                :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
-                        </div>
-                        <div>
-                            <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </span>
+                        <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>    
+                        <div class="specs">
+                            <div> <span> <strong>{{ element.name }}</strong> </span> </div>
+                            <div v-if="element.name!==element.original_name"> <span> {{element.original_name}} </span></div>
+                            <div>
+                                <span>
+                                    {{element.original_language}}
+                                </span>
+                                <img v-if="getLang(element.original_language)"
+                                    :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
+                            </div>
+                            <div>
+                                <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </li>

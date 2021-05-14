@@ -73,7 +73,9 @@ ul.list-container{
     height: 100%;
 }
 .specs{
-    padding: 10px 0;
+    padding: 20px;
+    display: none;
+    width: 100%;
 }
 .vote-star{
     color: #f5bb1d;
@@ -83,6 +85,16 @@ ul.list-container{
 }
 .logo-container img{
     height: 100%;
+}
+/* HOVER */
+.img-container:hover img{
+    display: none;
+}
+.img-container:hover .not-avaliable{
+    display: none;
+}
+.img-container:hover .specs{
+    display: block;
 }
 /* RESPONSIVENESS */
 @media screen and (max-width:600px) {
