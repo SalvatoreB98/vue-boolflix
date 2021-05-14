@@ -1,5 +1,7 @@
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -7,6 +9,9 @@ html{
 }
 body{
     background-color: rgb(39, 39, 39);
+}
+h4{
+    margin: 10px 0px 5px 0px;
 }
 header{
     height:80px;
@@ -54,6 +59,7 @@ ul.list-container{
 }   
 .list-container li{
     padding: 50px 20px;
+    cursor: pointer;
 
 }
 .language{
@@ -97,8 +103,31 @@ ul.list-container{
 .logo-container img{
     height: 100%;
 }
+.specs-window{
+    padding: 25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-45%);
+    width: 80vw;
+    background-color: black;
+    height: 80vh;
+    box-shadow: 0px 0px 20px black;
+}
+.close{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 25px;
+}
+.cast-actor{
 
-
+}
+.specs-window img{
+    height: 50px;
+}
 
 /* HOVER */
 .img-container:hover{

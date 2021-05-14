@@ -19,6 +19,7 @@
 
 <body>
     <div id=root>
+        <!-- HEADER CON LOGO E RICERCA -->
         <header>
             <div class="logo-container"><img src="imgs/boolflix.png" alt=""> </div>
             <div class="search-container">
@@ -27,11 +28,28 @@
             </div>
         </header>
         <main>
-            <div class="specs-window">
-                
+            <!-- POP UP SPECS -->
+            <div v-if="isContentOpened" class="specs-window">
+                <img :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
+                <h4> CAST: </h4>
+                <span class="cast-actor" v-for="(actor,index) in activeContent.cast" v-if="index < 5">
+                     {{actor.name}} 
+                     <span>, </span>
+                    <span v-if="index == 4">...</span> </span>
+                <h4> OVERVIEW </h4>
+                <p> {{activeContent.overview}}</p>
+                <h4>GENRES:</h4>
+                <span v-for="genre in activeContent.genres">{{genre.name}} </span>
+                <!-- CLOSE BUTTON -->
+                <div class="close" @click="closeWindow();">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </div>
             </div>
             <ul class="list-container">
-                <li v-for="element in movieList">
+                <!-- LISTA FILM -->
+                <li v-for="element in movieList" @click="setActiveContent(element);
+                                                        getCast('movie',element.id);
+                                                        getGenres('movie',element.id)">
                     <div class="img-container">
                         <img v-if="element.poster_path!==null" class="poster"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
@@ -59,7 +77,8 @@
                         </div>
                     </div>
                 </li>
-                <li v-for="element in tvSerieslist ">
+                <!-- LISTA SERIE TV -->
+                <li v-for="element in tvSerieslist" @click="setActiveContent(element);getCast('tv',element.id)">
                     <div class="img-container">
                         <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">

@@ -4,7 +4,9 @@ const app = new Vue({
         apiKey: '4d36ecbf5868a91e4711e736491b2ad9',
         textToSearch: '',
         movieList: [],
-        tvSerieslist: []
+        tvSerieslist: [],
+        activeContent: { cast: [] },
+        isContentOpened: false
     },
     methods: {
         searchText() {
@@ -26,7 +28,7 @@ const app = new Vue({
         getByQuery(typeOfSearch) {
             axios.get('https://api.themoviedb.org/3/search/' + typeOfSearch, {
                 params: {
-                    api_key: '4d36ecbf5868a91e4711e736491b2ad9',
+                    api_key: this.apiKey,
                     query: this.textToSearch,
                     language: 'it-IT'
                 }
@@ -45,6 +47,30 @@ const app = new Vue({
 
                 })
         },
+        getCast(typeOfContent, movieId) {
+
+            axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}/credits`, {
+                params: {
+                    api_key: this.apiKey,
+                }
+            }
+            ).then((resp) => {
+
+                Vue.set(this.activeContent, 'cast', resp.data.cast)
+                console.log(this.activeContent)
+            })
+        },
+        getGenres(typeOfContent,movieId) {
+            axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}`, {
+                params: {
+                    api_key: this.apiKey,
+                }
+            }
+            ).then((resp) => {
+                Vue.set(this.activeContent, 'genres', resp.data.genres)
+                console.log(this.activeContent)
+            })
+        },
         /**
          * 
          * @param {float} vote 
@@ -52,6 +78,13 @@ const app = new Vue({
         roundVote(vote) {
             vote = vote / 2;
             return Math.round(vote);
+        },
+        setActiveContent(element) {
+            this.activeContent = element;
+            this.isContentOpened = true;
+        },
+        closeWindow() {
+            this.isContentOpened = false
         }
     },
     mounted() {
