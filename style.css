@@ -1,6 +1,9 @@
 *{
     box-sizing: border-box;
 }
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 li{
     padding: 15px;
     display: inline-block;
@@ -8,4 +11,10 @@ li{
 .language{
     width: 15px;
     height: 15px;
+}
+.img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
 }

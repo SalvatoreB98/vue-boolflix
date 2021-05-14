@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="data.js"></script>
     <!-- STYLES -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
@@ -24,26 +25,47 @@
             <ol>
 
                 <li v-for="element in movieList">
-                    <div class="img-container"> 
-                        <img :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt=""> 
+                    <div class="img-container">
+                        <img v-if="element.poster_path!==null"
+                            :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
+                        <div v-else>Nessuna copertina disponibile</div>
                     </div>
                     <div> TITOLO: <span> {{ element.title }} </span> </div>
                     <div> TITOLO ORIGINALE: <span> {{element.original_title}} </span></div>
-                    <div> LINGUA <span> {{element.original_language}} </span> <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang" ></div>
-                    <div> VOTO <span> {{element.vote_average}} </span></div>
+                    <div> LINGUA <span> {{element.original_language}} </span>
+                        <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)"
+                            class="language" alt="lang">
+                    </div>
+                    <div> VOTO
+                        <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </li>
 
-                <li v-for="element in tvSerieslist "> 
-                    <div class="img-container"> 
-                        <img :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt=""> 
+                <li v-for="element in tvSerieslist ">
+                    <div class="img-container">
+                        <img v-if="element.poster_path!==null"
+                            :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
+                        <div v-else>Nessuna copertina disponibile</div>
                     </div>
                     <div> TITOLO: <span> {{ element.name }} </span> </div>
                     <div> TITOLO ORIGINALE: <span> {{element.original_name}} </span></div>
-                    <div> LINGUA <span> {{element.original_language}} </span> <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang" ></div>
-                    <div> VOTO <span> {{element.vote_average}} </span></div>
+                    <div> LINGUA
+                        <span>
+                            {{element.original_language}}
+                        </span>
+                        <img v-if="getLang(element.original_language)" :src="'imgs/'+getLang(element.original_language)"
+                            class="language" alt="lang">
+                    </div>
+                    <div> VOTO
+                        <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </li>
             </ol>
-            
+
         </main>
     </div>
     <script src="script.js"></script>

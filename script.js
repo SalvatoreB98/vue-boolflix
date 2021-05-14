@@ -19,7 +19,6 @@ const app = new Vue({
                 return false
             }
         },
-
         /**
          * 
          * @param {string} movie 
@@ -45,6 +44,14 @@ const app = new Vue({
                     }
 
                 })
+        },
+        /**
+         * 
+         * @param {float} vote 
+         */
+        roundVote(vote) {
+            vote = vote / 2;
+            return Math.round(vote);
         }
     },
     mounted() {
