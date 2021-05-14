@@ -6,7 +6,10 @@ const app = new Vue({
         movieList: [],
         tvSerieslist: [],
         activeContent: { cast: [] },
-        isContentOpened: false
+        isContentOpened: false,
+        genresList: [],
+        moviesChecked: false,
+        seriesChecked: false
     },
     methods: {
         searchText() {
@@ -60,15 +63,27 @@ const app = new Vue({
                 console.log(this.activeContent)
             })
         },
-        getGenres(typeOfContent,movieId) {
+        getGenresbyId(typeOfContent,movieId) {
             axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}`, {
                 params: {
                     api_key: this.apiKey,
+                    language: 'it-IT'
                 }
             }
             ).then((resp) => {
                 Vue.set(this.activeContent, 'genres', resp.data.genres)
                 console.log(this.activeContent)
+            })
+        },
+        getAllGenres(){
+            axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {
+                params: {
+                    api_key: this.apiKey,
+                    language: 'it-IT'
+                }
+            }
+            ).then((resp) => {
+                this.genresList = resp.data.genres
             })
         },
         /**
@@ -88,6 +103,6 @@ const app = new Vue({
         }
     },
     mounted() {
-
+        this.getAllGenres();
     }
 })

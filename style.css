@@ -55,7 +55,7 @@ ul.list-container{
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    margin-top: 100px;
+    margin-top: 25px;
 }   
 .list-container li{
     padding: 50px 20px;
@@ -128,6 +128,31 @@ ul.list-container{
 .specs-window img{
     height: 50px;
 }
+.filters{
+    margin: 20px;
+    display: flex;
+    box-shadow: 0px 0px 20px black;
+
+}
+.filters option{
+    margin: 10px 0px;
+}
+.filters select {
+    flex-grow: 1;
+    padding: 5px 20px;
+    font-size: 20px;
+    width:50%; 
+    background-color: black;
+    color: white;
+    border: none;
+}
+.filters label{
+    display: inline-block;
+    vertical-align: middle;
+}
+.filters-header{
+    margin: 10px 10px;
+}
 
 /* HOVER */
 .img-container:hover{
@@ -144,7 +169,16 @@ ul.list-container{
     display: block;
 }
 
-
+/* UTILITIES */
+.black-background{
+    background-color: black;
+}
+.padding-10px{
+    padding: 10px;
+}
+.margin-top-page{
+    margin-top: 100px;
+}
 /* RESPONSIVENESS */
 @media screen and (max-width:450px) {
     header .btn{

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="imgs/favicon.png" />
     <!-- SCRIPT AND LIBRARIES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
@@ -14,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Boolflix</title>
 </head>
 
 <body>
@@ -27,19 +28,32 @@
                 <span class="btn" @click="searchText()">SEARCH</span>
             </div>
         </header>
+        <div class="filters-header margin-top-page"> Filtra <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-chevron-right" aria-hidden="true"></i> </div>
+        <div class="filters">
+            <select name="genres" id="" :size="10">
+                <option v-for="genre in genresList" value="genre.name"> {{genre.name}}</option>
+            </select>
+            <div class="black-background padding-10px">
+                <label for="series"> <input type="checkbox" id="series" v-model="seriesChecked"> SERIE TV </label>
+                <label for="movies"> <input type="checkbox" id="movies" v-model="moviesChecked"> MOVIES</label>
+            </div>
+            
+
+        </div>
         <main>
             <!-- POP UP SPECS -->
             <div v-if="isContentOpened" class="specs-window">
-                <img :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
+                <img v-if="activeContent.poster_path!==null"
+                    :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
                 <h4> CAST: </h4>
                 <span class="cast-actor" v-for="(actor,index) in activeContent.cast" v-if="index < 5">
-                     {{actor.name}} 
-                     <span>, </span>
+                    {{actor.name}}
+                    <span>, </span>
                     <span v-if="index == 4">...</span> </span>
                 <h4> OVERVIEW </h4>
                 <p> {{activeContent.overview}}</p>
-                <h4>GENRES:</h4>
-                <span v-for="genre in activeContent.genres">{{genre.name}} </span>
+                <h4>GENERE:</h4>
+                <span v-for="genre in activeContent.genres">{{genre.name}}, </span>
                 <!-- CLOSE BUTTON -->
                 <div class="close" @click="closeWindow();">
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -49,7 +63,7 @@
                 <!-- LISTA FILM -->
                 <li v-for="element in movieList" @click="setActiveContent(element);
                                                         getCast('movie',element.id);
-                                                        getGenres('movie',element.id)">
+                                                        getGenresById('movie',element.id)">
                     <div class="img-container">
                         <img v-if="element.poster_path!==null" class="poster"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
