@@ -20,7 +20,7 @@
         <header>
             <div class="logo-container"><img src="imgs/boolflix.png" alt=""> </div>
             <div class="search-container">
-                <input type="text" v-model="textToSearch" placeholder="Cerca">
+                <input type="text" v-model="textToSearch" placeholder="Cerca" @keyup.enter="searchText()">
                 <span class="btn" @click="searchText()">SEARCH</span>
             </div>
         </header>
@@ -28,34 +28,39 @@
             <ul class="list-container">
                 <li v-for="element in movieList">
                     <div class="img-container">
-                        <img class="poster" v-if="element.poster_path!==null"
+                        <img v-if="element.poster_path!==null" class="poster"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
-                            <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>
-                            <div class="specs">
-                                <div> <span> <strong>{{ element.title }}</strong> </span> </div>
-                                <div v-if="element.title!==element.original_original_title">Titolo originale: <span>
-                                        {{element.original_title}}
-                                    </span></div>
-                                <div> <span> {{element.original_language}} </span>
-                                    <img v-if="getLang(element.original_language)"
-                                        :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
-                                </div>
-                                <div>
-                                    <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </span>
-                                </div>
+                        <img v-else src="imgs/no-poster.png" alt="" class="poster">
+                        <div class="specs">
+                            <div> <span> <strong>{{ element.title }}</strong> </span> </div>
+                            <div v-if="element.title!=element.original_original_title">Titolo originale:
+                                <span>
+                                    {{element.original_title}}
+                                </span>
                             </div>
+                            <div> 
+                                <span> {{element.original_language}} </span>
+                                <img v-if="getLang(element.original_language)"
+                                    :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
+                            </div>
+                            <div>
+                                <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="overview">{{element.overview}}</div>
+                        </div>
                     </div>
                 </li>
                 <li v-for="element in tvSerieslist ">
                     <div class="img-container">
                         <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
-                        <div class="not-avaliable" v-else>Nessuna copertina disponibile</div>    
+                        <img class="poster" v-else src="imgs/no-poster.png" alt="">
                         <div class="specs">
                             <div> <span> <strong>{{ element.name }}</strong> </span> </div>
-                            <div v-if="element.name!==element.original_name"> <span> {{element.original_name}} </span></div>
+                            <div v-if="element.name!=element.original_name"> <span> {{element.original_name}} </span>
+                            </div>
                             <div>
                                 <span>
                                     {{element.original_language}}
@@ -68,6 +73,7 @@
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </span>
                             </div>
+                            <div class="overview">{{element.overview}}</div>
                         </div>
                     </div>
                 </li>
