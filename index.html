@@ -31,6 +31,7 @@
         <div @click="openCloseFilters()" class="filters-header margin-top-page"> Filtra <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-chevron-right" :class="{'fa-rotate-90' :isFilterOpen }" aria-hidden="true"></i> </div>
         <div class="filters" :class="{'filter-open': isFilterOpen}">
             <select name="genres" id="" :size="10">
+                <option disabled value="null"> Scegli il genere </option>
                 <option v-for="genre in genresList" value="genre.name"> {{genre.name}}</option>
             </select>
             <div class="black-background padding-10px">

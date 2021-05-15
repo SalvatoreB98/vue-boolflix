@@ -9,6 +9,8 @@ html{
 }
 body{
     background-color: rgb(39, 39, 39);
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
 h4{
     margin: 10px 0px 5px 0px;
@@ -27,6 +29,7 @@ header input{
     display: inline-block;
     height: 35px;
     min-width: 250px;
+    width: 50%;
     border: 0.5px solid white;
     color: white;
     background-color:rgb(46, 45, 45);
@@ -47,9 +50,11 @@ strong{
     font-size: 1.2em;
 }
 .search-container{
+    text-align: right;
     align-self: center;
     margin-right: 25px;
     vertical-align: middle;
+    flex-grow: 1;
 }
 ul.list-container{
     display: flex;
@@ -129,6 +134,7 @@ ul.list-container{
     height: 50px;
 }
 .filters{
+    position: absolute;
     width: 400px;
     height: 0px;
     overflow: hidden;
@@ -160,7 +166,6 @@ ul.list-container{
 }
 .filter-open{
     height: 200px;
-
 }
 /* HOVER */
 .img-container:hover{
@@ -207,6 +212,13 @@ ul.list-container{
         width: 100%;
     }
     
+}
+@media screen and (max-width:600px) {
+    .filter-open{
+        height: 100px;
+        width: auto;
+    }
+
 }
 @media screen and (max-width:600px) and (min-width:451px) {
     .list-container li{
