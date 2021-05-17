@@ -80,7 +80,7 @@
             </div>
             <ul class="list-container" :class="{'blur' : isContentOpened}">
                 <!-- LISTA FILM -->
-                <li v-for="element in movieList" @click="setActiveContent(element);
+                <li v-for="element in moviesFiltered" @click="setActiveContent(element);
                                                         getCast('movie',element.id);
                                                         getGenresbyId('movie',element.id,element)">
                     <div class="img-container">
@@ -113,7 +113,7 @@
                     </div>
                 </li>
                 <!-- LISTA SERIE TV -->
-                <li v-for="element in tvSeriesList" @click="setActiveContent(element);getCast('tv',element.id);getGenresbyId('tv',element.id,element)">
+                <li v-for="element in tvSeriesFiltered" @click="setActiveContent(element);getCast('tv',element.id);getGenresbyId('tv',element.id,element)">
                     <div class="img-container">
                         <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">

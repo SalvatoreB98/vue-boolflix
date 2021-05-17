@@ -4,7 +4,9 @@ const app = new Vue({
         apiKey: '4d36ecbf5868a91e4711e736491b2ad9',
         textToSearch: '',
         movieList: [],
+        moviesFiltered: [],
         tvSeriesList: [],
+        tvSeriesFiltered: [],
         activeContent: {},
         isContentOpened: false,
         genresListTv: [],
@@ -45,12 +47,18 @@ const app = new Vue({
                     if (typeOfSearch == 'movie') {
                         console.log(resp.data.results);
                         this.movieList = resp.data.results
+                        this.moviesFiltered = resp.data.results
                     } else if (typeOfSearch == 'tv') {
                         this.tvSeriesList = resp.data.results.map((tvShow) => {
                             tvShow.title = tvShow.name;
                             tvShow.original_title = tvShow.original_name;
                             return tvShow;
-                        })
+                        });
+                        this.tvSeriesFiltered = resp.data.results.map((tvShow) => {
+                            tvShow.title = tvShow.name;
+                            tvShow.original_title = tvShow.original_name;
+                            return tvShow;
+                        });
                     }
 
                 })
@@ -116,25 +124,30 @@ const app = new Vue({
             this.isFilterOpen = !this.isFilterOpen
         },
         onChangeGenreMovie() {
-            this.movieList = this.movieList.filter((element) => {
+             // INITIAL RESET
+            this.moviesFiltered = [...this.movieList]
+            this.moviesFiltered = this.moviesFiltered.filter((element) => {
                 if (element.genre_ids.length > 0) {
                     if (element.genre_ids.includes(this.selectedGenre)) {
-                        return element;
+                        return true;
+                    } else {
+                        return false
                     }
-
                 }
-
             })
         },
         onChangeGenreTv() {
-            this.tvSeriesList = this.tvSeriesList.filter((element) => {
+            // INITIAL RESET
+            this.tvSeriesFiltered = [...this.tvSeriesList]
+            this.tvSeriesFiltered = this.tvSeriesFiltered.filter((element) => {
                 if (element.genre_ids.length > 0) {
                     if (element.genre_ids.includes(this.selectedGenre)) {
-                        return element;
+                        return true;
+                    } else {
+                        return false
                     }
 
                 }
-
             })
         }
 
