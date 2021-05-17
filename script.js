@@ -124,7 +124,7 @@ const app = new Vue({
             this.isFilterOpen = !this.isFilterOpen
         },
         onChangeGenreMovie() {
-             // INITIAL RESET
+            // INITIAL RESET
             this.moviesFiltered = [...this.movieList]
             this.moviesFiltered = this.moviesFiltered.filter((element) => {
                 if (element.genre_ids.length > 0) {
@@ -135,8 +135,6 @@ const app = new Vue({
                     }
                 }
             })
-        },
-        onChangeGenreTv() {
             // INITIAL RESET
             this.tvSeriesFiltered = [...this.tvSeriesList]
             this.tvSeriesFiltered = this.tvSeriesFiltered.filter((element) => {
@@ -149,8 +147,7 @@ const app = new Vue({
 
                 }
             })
-        }
-
+        },
     },
     mounted() {
         this.getAllGenres('tv', this.genresListTv);
