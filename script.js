@@ -5,7 +5,7 @@ const app = new Vue({
         textToSearch: '',
         movieList: [],
         tvSerieslist: [],
-        activeContent: { cast: [] },
+        activeContent: {},
         isContentOpened: false,
         genresList: [],
         moviesChecked: false,
@@ -55,7 +55,7 @@ const app = new Vue({
 
             axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}/credits`, {
                 params: {
-                    api_key: this.apiKey,
+                    api_key: this.apiKey,   
                 }
             }
             ).then((resp) => {

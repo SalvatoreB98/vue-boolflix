@@ -27,6 +27,7 @@ header{
 }
 header input{
     display: inline-block;
+    padding: 5px;
     height: 35px;
     min-width: 250px;
     width: 50%;
@@ -70,6 +71,7 @@ ul.list-container{
 .language{
     width: 15px;
     height: 15px;
+    vertical-align: middle;
 }
 .img-container{
     display: flex;
@@ -95,6 +97,9 @@ ul.list-container{
 .vote-star{
     color: #f5bb1d;
 }
+.fa-star-o{
+    color: gray;
+}
 .overview{
     display: -webkit-box;
     -webkit-line-clamp: 11;
@@ -109,6 +114,7 @@ ul.list-container{
     height: 100%;
 }
 .specs-window{
+    display: flex;
     padding: 25px;
     position: fixed;
     top: 50%;
@@ -118,6 +124,7 @@ ul.list-container{
     background-color: black;
     height: 80vh;
     box-shadow: 0px 0px 20px black;
+    overflow-y: auto;
 }
 .close{
     cursor: pointer;
@@ -130,8 +137,10 @@ ul.list-container{
 .cast-actor{
 
 }
-.specs-window img{
-    height: 50px;
+.specs-window .poster{
+    width: 20vw;
+    max-width: 300px;
+    border: 0.5px solid #ffffff73;
 }
 .filters{
     position: absolute;
@@ -194,7 +203,9 @@ ul.list-container{
 .margin-top-page{
     margin-top: 100px;
 }
-
+.top-margin{
+    margin-top: 10px;
+}
 
 
 /* ANIMATIONS */
@@ -217,6 +228,12 @@ ul.list-container{
     .filter-open{
         height: 100px;
         width: auto;
+    }
+    .filters{
+        width: auto;
+    }
+    .specs-window{
+        flex-direction: column;
     }
 
 }
@@ -257,3 +274,24 @@ ul.list-container{
     }
     
 }
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #000000; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

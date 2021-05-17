@@ -1,8 +1,9 @@
 // FLAG MAP
-const flagMap ={
-    en : 'en.png',
-    it : 'it.png',
-    es : 'es.png',
-    fr : 'fr.png',
+const flagMap = {
+    en: 'en.png',
+    it: 'it.png',
+    es: 'es.png',
+    fr: 'fr.png',
+    de: 'de.png',
     notFound: '',
 }

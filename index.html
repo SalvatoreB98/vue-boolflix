@@ -22,13 +22,15 @@
     <div id=root>
         <!-- HEADER CON LOGO E RICERCA -->
         <header>
-            <div class="logo-container"><img src="imgs/boolflix.png" alt=""> </div>
+            <div class="logo-container"><a href=""><img src="imgs/boolflix.png" alt=""></a> </div>
             <div class="search-container">
                 <input type="text" v-model="textToSearch" placeholder="Cerca" @keyup.enter="searchText()">
                 <span class="btn" @click="searchText()">SEARCH</span>
             </div>
         </header>
-        <div @click="openCloseFilters()" class="filters-header margin-top-page"> Filtra <i class="fa fa-filter" aria-hidden="true"></i> <i class="fa fa-chevron-right" :class="{'fa-rotate-90' :isFilterOpen }" aria-hidden="true"></i> </div>
+        <div @click="openCloseFilters()" class="filters-header margin-top-page"> Filtra <i class="fa fa-filter"
+                aria-hidden="true"></i> <i class="fa fa-chevron-right" :class="{'fa-rotate-90' :isFilterOpen }"
+                aria-hidden="true"></i> </div>
         <div class="filters" :class="{'filter-open': isFilterOpen}">
             <select name="genres" id="" :size="10">
                 <option disabled value="null"> Scegli il genere </option>
@@ -38,26 +40,42 @@
                 <label for="series"> <input type="checkbox" id="series" v-model="seriesChecked"> SERIE TV </label>
                 <label for="movies"> <input type="checkbox" id="movies" v-model="moviesChecked"> MOVIES</label>
             </div>
-            
+
 
         </div>
         <main>
             <!-- POP UP SPECS -->
             <div v-if="isContentOpened" class="specs-window">
-                <img v-if="activeContent.poster_path!==null"
-                    :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
-                <h4> CAST: </h4>
-                <span class="cast-actor" v-for="(actor,index) in activeContent.cast" v-if="index < 5">
-                    {{actor.name}}
-                    <span>, </span>
-                    <span v-if="index == 4">...</span> </span>
-                <h4> OVERVIEW </h4>
-                <p> {{activeContent.overview}}</p>
-                <h4>GENERE:</h4>
-                <span v-for="genre in activeContent.genres">{{genre.name}}, </span>
-                <!-- CLOSE BUTTON -->
-                <div class="close" @click="closeWindow();">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                <div class="padding-10px">
+                    <img class="poster" v-if="activeContent.poster_path!==null"
+                        :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
+                         <img class="poster" v-else src="imgs/no-poster.png" alt="">
+                </div>
+                <div class="padding-10px">
+                    <h4> CAST: </h4>
+                    <span class="cast-actor" v-for="(actor,index) in activeContent.cast" v-if="index < 5">
+                        {{actor.name}}
+                        <span>, </span>
+                        <span v-if="index == 4">...</span> </span>
+                    <h4> OVERVIEW </h4>
+                    <p> {{activeContent.overview}}</p>
+                    <h4>GENERE:</h4>
+                    <span v-for="genre in activeContent.genres">{{genre.name}}, </span>
+                    <div class="top-margin">
+                        <span> {{activeContent.original_language}} </span>
+                        <img v-if="getLang(activeContent.original_language)"
+                            :src="'imgs/'+getLang(activeContent.original_language)" class="language" alt="lang">
+                    </div>
+                    <div class="top-margin" v-if="activeContent.vote_average > 0">
+                        <span class="vote-star" v-for='index in 5'>
+                            <i v-if="index <= roundVote(activeContent.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                            <i v-else class="fa fa-star-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <!-- CLOSE BUTTON -->
+                    <div class="close" @click="closeWindow();">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </div>
                 </div>
             </div>
             <ul class="list-container">
@@ -83,10 +101,10 @@
                                     :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
                             </div>
                             <div v-if="element.vote_average > 0">
-                                <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                <span class="vote-star" v-for='index in 5'>
+                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                                    <i v-else class="fa fa-star-o" aria-hidden="true"></i>
                                 </span>
-                                {{(element.vote_average/2).toFixed(1)}}
                             </div>
                             <div class="overview">{{element.overview}}</div>
                         </div>
@@ -112,10 +130,10 @@
                                     :src="'imgs/'+getLang(element.original_language)" class="language" alt="lang">
                             </div>
                             <div v-if="element.vote_average > 0">
-                                <span class="vote-star" v-for='index in roundVote(element.vote_average)'>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                <span class="vote-star" v-for='index in 5'>
+                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                                    <i v-else class="fa fa-star-o" aria-hidden="true"></i>
                                 </span>
-                                {{(element.vote_average/2).toFixed(1)}}
                             </div>
                             <div class="overview">{{element.overview}}</div>
                         </div>
