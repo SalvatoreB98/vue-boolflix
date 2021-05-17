@@ -33,11 +33,11 @@
                 aria-hidden="true"></i> </div>
         <!-- FILTRI -->
         <div class="filters" :class="{'filter-open': isFilterOpen}">
-            <select name="genres" id="" :size="10" @change="onChangeGenre(movieList)" v-model="selectedGenre">
+            <select name="genres" id="" :size="10" @change="onChangeGenreMovie()" v-model="selectedGenre">
                 <option disabled value="null"> Scegli il genere per film  </option>
                 <option @click="openCloseFilters" v-for="genre in genresListMovie" :value="genre.id"> {{genre.name}}</option>
             </select>
-            <select name="genres" id="" :size="10" @change="onChangeGenre(tvSeriesList)" v-model="selectedGenre">
+            <select name="genres" id="" :size="10" @change="onChangeGenreTv()" v-model="selectedGenre">
                 <option disabled value="null"> Scegli il genere per serie TV </option>
                 <option @click="openCloseFilters" v-for="genre in genresListTv" :value="genre.id"> {{genre.name}}</option>
             </select>
@@ -108,7 +108,7 @@
                                 </span>
                             </div>
                             <div class="overview">{{element.overview}}</div>
-                            <div> FILM </div>
+                            <div class="color-gray">Clicca per ulteriori informazioni</div>
                         </div>
                     </div>
                 </li>
@@ -139,7 +139,6 @@
                                 </span>
                             </div>
                             <div class="overview">{{element.overview}}</div>
-                            <div> SERIE TV </div>
                         </div>
                     </div>
                 </li>

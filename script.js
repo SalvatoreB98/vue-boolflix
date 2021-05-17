@@ -115,12 +115,24 @@ const app = new Vue({
         openCloseFilters() {
             this.isFilterOpen = !this.isFilterOpen
         },
-        onChangeGenre(elementToFilter) {
-            elementToFilter = elementToFilter.filter((element) => {
+        onChangeGenreMovie() {
+            this.movieList = this.movieList.filter((element) => {
                 if (element.genre_ids.length > 0) {
                     if (element.genre_ids.includes(this.selectedGenre)) {
                         return element;
                     }
+
+                }
+
+            })
+        },
+        onChangeGenreTv() {
+            this.tvSeriesList = this.tvSeriesList.filter((element) => {
+                if (element.genre_ids.length > 0) {
+                    if (element.genre_ids.includes(this.selectedGenre)) {
+                        return element;
+                    }
+
                 }
 
             })

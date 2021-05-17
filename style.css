@@ -63,10 +63,12 @@ ul.list-container{
     flex-wrap: wrap;
     list-style: none;
     margin-top: 25px;
+    transition: filter 0.25s ease-out;
 }   
 .list-container li{
     padding: 50px 20px;
     cursor: pointer;
+    position: relative;
 
 }
 .language{
@@ -153,6 +155,7 @@ ul.list-container{
     display: flex;
     box-shadow: 0px 0px 20px black;
     transition: height 0.25s ease-in-out;
+    z-index: 9;
 
 }
 .filters option{
@@ -211,7 +214,9 @@ ul.list-container{
 .blur{
     filter: blur(4px);
 }
-
+.color-gray{
+    color: gray;
+}
 /* ANIMATIONS */
 .fa-chevron-right{
     transition: transform 0.1s ease-in;
