@@ -4,19 +4,23 @@ const app = new Vue({
         apiKey: '4d36ecbf5868a91e4711e736491b2ad9',
         textToSearch: '',
         movieList: [],
-        tvSerieslist: [],
+        tvSeriesList: [],
         activeContent: {},
         isContentOpened: false,
-        genresList: [],
-        moviesChecked: false,
-        seriesChecked: false,
+        genresListTv: [],
+        genresListMovie: [],
         isFilterOpen: false,
+        selectedGenre: '',
+        typeSelected: ''
     },
     methods: {
         searchText() {
             this.movieList = [];
             this.getByQuery('movie');
             this.getByQuery('tv');
+            this.moviesChecked = true;
+            this.seriesChecked = true;
+
         },
         getLang(isoLang) {
             if (flagMap.hasOwnProperty(isoLang)) {
@@ -42,7 +46,7 @@ const app = new Vue({
                         console.log(resp.data.results);
                         this.movieList = resp.data.results
                     } else if (typeOfSearch == 'tv') {
-                        this.tvSerieslist = resp.data.results.map((tvShow) => {
+                        this.tvSeriesList = resp.data.results.map((tvShow) => {
                             tvShow.title = tvShow.name;
                             tvShow.original_title = tvShow.original_name;
                             return tvShow;
@@ -55,7 +59,7 @@ const app = new Vue({
 
             axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}/credits`, {
                 params: {
-                    api_key: this.apiKey,   
+                    api_key: this.apiKey,
                 }
             }
             ).then((resp) => {
@@ -64,7 +68,13 @@ const app = new Vue({
                 console.log(this.activeContent)
             })
         },
-        getGenresbyId(typeOfContent,movieId) {
+        /**
+         * 
+         * @param {String} typeOfContent tipo di content se tv o movie
+         * @param {Int} movieId id dell'elemento da cui prendere i generi
+         * @param {Object} element elemento da modificare
+         */
+        getGenresbyId(typeOfContent, movieId, element) {
             axios.get(`https://api.themoviedb.org/3/${typeOfContent}/${movieId}`, {
                 params: {
                     api_key: this.apiKey,
@@ -72,19 +82,19 @@ const app = new Vue({
                 }
             }
             ).then((resp) => {
-                Vue.set(this.activeContent, 'genres', resp.data.genres)
-                console.log(this.activeContent)
+                Vue.set(element, 'genres', resp.data.genres)
+                console.log(element)
             })
         },
-        getAllGenres(){
-            axios.get(`https://api.themoviedb.org/3/genre/movie/list`, {
+        getAllGenres(typeOfContent, element) {
+            axios.get(`https://api.themoviedb.org/3/genre/${typeOfContent}/list`, {
                 params: {
                     api_key: this.apiKey,
                     language: 'it-IT'
                 }
             }
             ).then((resp) => {
-                this.genresList = resp.data.genres
+                element.push(...resp.data.genres)
             })
         },
         /**
@@ -102,11 +112,23 @@ const app = new Vue({
         closeWindow() {
             this.isContentOpened = false
         },
-        openCloseFilters(){
+        openCloseFilters() {
             this.isFilterOpen = !this.isFilterOpen
+        },
+        onChangeGenre(elementToFilter) {
+            elementToFilter = elementToFilter.filter((element) => {
+                if (element.genre_ids.length > 0) {
+                    if (element.genre_ids.includes(this.selectedGenre)) {
+                        return element;
+                    }
+                }
+
+            })
         }
+
     },
     mounted() {
-        this.getAllGenres();
+        this.getAllGenres('tv', this.genresListTv);
+        this.getAllGenres('movie', this.genresListMovie);
     }
 })

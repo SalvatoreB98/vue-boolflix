@@ -24,6 +24,7 @@ header{
     justify-content:  space-between;
     background-color: black;
     width: 100%;
+    z-index: 11;
 }
 header input{
     display: inline-block;
@@ -125,6 +126,7 @@ ul.list-container{
     height: 80vh;
     box-shadow: 0px 0px 20px black;
     overflow-y: auto;
+    z-index: 10;
 }
 .close{
     cursor: pointer;
@@ -143,8 +145,8 @@ ul.list-container{
     border: 0.5px solid #ffffff73;
 }
 .filters{
+    width: 75vw;
     position: absolute;
-    width: 400px;
     height: 0px;
     overflow: hidden;
     margin: 20px;
@@ -159,8 +161,7 @@ ul.list-container{
 .filters select {
     flex-grow: 1;
     padding: 5px 20px;
-    font-size: 20px;
-    width:50%; 
+    font-size: 20px; 
     background-color: black;
     color: white;
     border: none;
@@ -172,6 +173,7 @@ ul.list-container{
 .filters-header{
     margin: 10px 10px;
     cursor: pointer;
+
 }
 .filter-open{
     height: 200px;
@@ -206,7 +208,9 @@ ul.list-container{
 .top-margin{
     margin-top: 10px;
 }
-
+.blur{
+    filter: blur(4px);
+}
 
 /* ANIMATIONS */
 .fa-chevron-right{
@@ -230,7 +234,8 @@ ul.list-container{
         width: auto;
     }
     .filters{
-        width: auto;
+        width: 75vw;
+        flex-direction: column;
     }
     .specs-window{
         flex-direction: column;

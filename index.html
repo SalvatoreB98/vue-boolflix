@@ -31,17 +31,16 @@
         <div @click="openCloseFilters()" class="filters-header margin-top-page"> Filtra <i class="fa fa-filter"
                 aria-hidden="true"></i> <i class="fa fa-chevron-right" :class="{'fa-rotate-90' :isFilterOpen }"
                 aria-hidden="true"></i> </div>
+        <!-- FILTRI -->
         <div class="filters" :class="{'filter-open': isFilterOpen}">
-            <select name="genres" id="" :size="10">
-                <option disabled value="null"> Scegli il genere </option>
-                <option v-for="genre in genresList" value="genre.name"> {{genre.name}}</option>
+            <select name="genres" id="" :size="10" @change="onChangeGenre(movieList)" v-model="selectedGenre">
+                <option disabled value="null"> Scegli il genere per film  </option>
+                <option @click="openCloseFilters" v-for="genre in genresListMovie" :value="genre.id"> {{genre.name}}</option>
             </select>
-            <div class="black-background padding-10px">
-                <label for="series"> <input type="checkbox" id="series" v-model="seriesChecked"> SERIE TV </label>
-                <label for="movies"> <input type="checkbox" id="movies" v-model="moviesChecked"> MOVIES</label>
-            </div>
-
-
+            <select name="genres" id="" :size="10" @change="onChangeGenre(tvSeriesList)" v-model="selectedGenre">
+                <option disabled value="null"> Scegli il genere per serie TV </option>
+                <option @click="openCloseFilters" v-for="genre in genresListTv" :value="genre.id"> {{genre.name}}</option>
+            </select>
         </div>
         <main>
             <!-- POP UP SPECS -->
@@ -49,7 +48,7 @@
                 <div class="padding-10px">
                     <img class="poster" v-if="activeContent.poster_path!==null"
                         :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
-                         <img class="poster" v-else src="imgs/no-poster.png" alt="">
+                    <img class="poster" v-else src="imgs/no-poster.png" alt="">
                 </div>
                 <div class="padding-10px">
                     <h4> CAST: </h4>
@@ -68,7 +67,8 @@
                     </div>
                     <div class="top-margin" v-if="activeContent.vote_average > 0">
                         <span class="vote-star" v-for='index in 5'>
-                            <i v-if="index <= roundVote(activeContent.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                            <i v-if="index <= roundVote(activeContent.vote_average)" class="fa fa-star"
+                                aria-hidden="true"></i>
                             <i v-else class="fa fa-star-o" aria-hidden="true"></i>
                         </span>
                     </div>
@@ -78,11 +78,11 @@
                     </div>
                 </div>
             </div>
-            <ul class="list-container">
+            <ul class="list-container" :class="{'blur' : isContentOpened}">
                 <!-- LISTA FILM -->
                 <li v-for="element in movieList" @click="setActiveContent(element);
                                                         getCast('movie',element.id);
-                                                        getGenresbyId('movie',element.id)">
+                                                        getGenresbyId('movie',element.id,element)">
                     <div class="img-container">
                         <img v-if="element.poster_path!==null" class="poster"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
@@ -102,16 +102,18 @@
                             </div>
                             <div v-if="element.vote_average > 0">
                                 <span class="vote-star" v-for='index in 5'>
-                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star"
+                                        aria-hidden="true"></i>
                                     <i v-else class="fa fa-star-o" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div class="overview">{{element.overview}}</div>
+                            <div> FILM </div>
                         </div>
                     </div>
                 </li>
                 <!-- LISTA SERIE TV -->
-                <li v-for="element in tvSerieslist" @click="setActiveContent(element);getCast('tv',element.id)">
+                <li v-for="element in tvSeriesList" @click="setActiveContent(element);getCast('tv',element.id);getGenresbyId('tv',element.id,element)">
                     <div class="img-container">
                         <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
@@ -131,11 +133,13 @@
                             </div>
                             <div v-if="element.vote_average > 0">
                                 <span class="vote-star" v-for='index in 5'>
-                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star" aria-hidden="true"></i>
+                                    <i v-if="index <= roundVote(element.vote_average)" class="fa fa-star"
+                                        aria-hidden="true"></i>
                                     <i v-else class="fa fa-star-o" aria-hidden="true"></i>
                                 </span>
                             </div>
                             <div class="overview">{{element.overview}}</div>
+                            <div> SERIE TV </div>
                         </div>
                     </div>
                 </li>
