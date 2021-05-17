@@ -123,7 +123,7 @@ const app = new Vue({
         openCloseFilters() {
             this.isFilterOpen = !this.isFilterOpen
         },
-        onChangeGenreMovie() {
+        onChangeGenre() {
             // INITIAL RESET
             this.moviesFiltered = [...this.movieList]
             this.moviesFiltered = this.moviesFiltered.filter((element) => {

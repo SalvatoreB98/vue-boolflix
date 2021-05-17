@@ -33,11 +33,11 @@
                 aria-hidden="true"></i> </div>
         <!-- FILTRI -->
         <div class="filters" :class="{'filter-open': isFilterOpen}">
-            <select name="genres" id="" :size="10" @change="onChangeGenreMovie()" v-model="selectedGenre">
+            <select name="genres" id="" :size="10" @change="onChangeGenre()" v-model="selectedGenre">
                 <option disabled value="null"> Filtra i film per genere </option>
                 <option @click="openCloseFilters" v-for="genre in genresListMovie" :value="genre.id"> {{genre.name}}</option>
             </select>
-            <select name="genres" id="" :size="10" @change="onChangeGenreTv()" v-model="selectedGenre">
+            <select name="genres" id="" :size="10" @change="onChangeGenre()" v-model="selectedGenre">
                 <option disabled value="null"> Filtra le serie TV per genere </option>
                 <option @click="openCloseFilters" v-for="genre in genresListTv" :value="genre.id"> {{genre.name}}</option>
             </select>
