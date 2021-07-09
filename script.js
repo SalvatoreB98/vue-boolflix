@@ -36,32 +36,46 @@ const app = new Vue({
          * @param {string} movie 
          */
         getByQuery(typeOfSearch) {
-            axios.get('https://api.themoviedb.org/3/search/' + typeOfSearch, {
-                params: {
-                    api_key: this.apiKey,
-                    query: this.textToSearch,
-                    language: 'it-IT'
-                }
-            })
-                .then((resp) => {
-                    if (typeOfSearch == 'movie') {
-                        console.log(resp.data.results);
-                        this.movieList = resp.data.results
-                        this.moviesFiltered = resp.data.results
-                    } else if (typeOfSearch == 'tv') {
-                        this.tvSeriesList = resp.data.results.map((tvShow) => {
-                            tvShow.title = tvShow.name;
-                            tvShow.original_title = tvShow.original_name;
-                            return tvShow;
-                        });
-                        this.tvSeriesFiltered = resp.data.results.map((tvShow) => {
-                            tvShow.title = tvShow.name;
-                            tvShow.original_title = tvShow.original_name;
-                            return tvShow;
-                        });
+            if (typeOfSearch === '') {
+                axios.get(`https://api.themoviedb.org/3/movie/top_rated`, {
+                    params: {
+                        api_key: this.apiKey,
+                        language: 'it-IT'
                     }
-
+                }
+                ).then((resp) => {
+                    console.log(resp.data.results);
+                    this.moviesFiltered = resp.data.results
                 })
+            } else {
+                axios.get('https://api.themoviedb.org/3/search/' + typeOfSearch, {
+                    params: {
+                        api_key: this.apiKey,
+                        query: this.textToSearch,
+                        language: 'it-IT'
+                    }
+                })
+                    .then((resp) => {
+                        if (typeOfSearch == 'movie') {
+                            console.log(resp.data.results);
+                            this.movieList = resp.data.results
+                            this.moviesFiltered = resp.data.results
+                        } else if (typeOfSearch == 'tv') {
+                            this.tvSeriesList = resp.data.results.map((tvShow) => {
+                                tvShow.title = tvShow.name;
+                                tvShow.original_title = tvShow.original_name;
+                                return tvShow;
+                            });
+                            this.tvSeriesFiltered = resp.data.results.map((tvShow) => {
+                                tvShow.title = tvShow.name;
+                                tvShow.original_title = tvShow.original_name;
+                                return tvShow;
+                            });
+                        }
+
+                    })
+            }
+
         },
         getCast(typeOfContent, movieId) {
 
@@ -150,6 +164,16 @@ const app = new Vue({
         },
     },
     mounted() {
+        axios.get(`https://api.themoviedb.org/3/movie/top_rated`, {
+            params: {
+                api_key: this.apiKey,
+                language: 'it-IT'
+            }
+        }
+        ).then((resp) => {
+            console.log(resp.data.results);
+            this.moviesFiltered = resp.data.results
+        })
         this.getAllGenres('tv', this.genresListTv);
         this.getAllGenres('movie', this.genresListMovie);
     }
