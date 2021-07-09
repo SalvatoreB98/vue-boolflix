@@ -11,7 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="data.js"></script>
     <!-- STYLES -->
-    <meta property="og:image" content="imgs/boolflix-link-preview.jpg">
+    <meta property="og:title" content="Boolflix">
+    <meta property="og:description" content="Progetto realizzato per Boolean Trainee">
+    <meta property="og:image" content="https://raw.githubusercontent.com/SalvatoreB98/vue-boolflix/master/imgs/boolflix-link-preview.jpg">
+    <meta property="og:url" content="https://salvatoreb98.github.io/vue-boolflix/">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="image_src" href="imgs/boolflix-link-preview.jpg">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -37,11 +41,13 @@
         <div class="filters" :class="{'filter-open': isFilterOpen}">
             <select name="genres" id="" :size="10" @change="onChangeGenre()" v-model="selectedGenre">
                 <option disabled value="null"> Filtra i film per genere </option>
-                <option @click="openCloseFilters" v-for="genre in genresListMovie" :value="genre.id"> {{genre.name}}</option>
+                <option @click="openCloseFilters" v-for="genre in genresListMovie" :value="genre.id"> {{genre.name}}
+                </option>
             </select>
             <select name="genres" id="" :size="10" @change="onChangeGenre()" v-model="selectedGenre">
                 <option disabled value="null"> Filtra le serie TV per genere </option>
-                <option @click="openCloseFilters" v-for="genre in genresListTv" :value="genre.id"> {{genre.name}}</option>
+                <option @click="openCloseFilters" v-for="genre in genresListTv" :value="genre.id"> {{genre.name}}
+                </option>
             </select>
         </div>
         <main>
@@ -115,7 +121,8 @@
                     </div>
                 </li>
                 <!-- LISTA SERIE TV -->
-                <li v-for="element in tvSeriesFiltered" @click="setActiveContent(element);getCast('tv',element.id);getGenresbyId('tv',element.id,element)">
+                <li v-for="element in tvSeriesFiltered"
+                    @click="setActiveContent(element);getCast('tv',element.id);getGenresbyId('tv',element.id,element)">
                     <div class="img-container">
                         <img class="poster" v-if="element.poster_path!==null"
                             :src="'https://image.tmdb.org/t/p/' +'w342'+element.poster_path" alt="">
