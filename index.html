@@ -58,7 +58,7 @@
                         :src="'https://image.tmdb.org/t/p/' +'w342'+ activeContent.poster_path" alt="">
                     <img class="poster" v-else src="imgs/no-poster.png" alt="">
                 </div>
-                <div class="padding-10px">
+                <div class="max-width padding-10px">
                     <h4> CAST: </h4>
                     <span class="cast-actor" v-for="(actor,index) in activeContent.cast" v-if="index < 5">
                         {{actor.name}}

@@ -217,6 +217,10 @@ ul.list-container{
 .color-gray{
     color: gray;
 }
+.max-width{
+    max-width: 800px;
+    margin: auto;
+}
 /* ANIMATIONS */
 .fa-chevron-right{
     transition: transform 0.1s ease-in;
