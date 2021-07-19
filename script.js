@@ -20,9 +20,6 @@ const app = new Vue({
             this.movieList = [];
             this.getByQuery('movie');
             this.getByQuery('tv');
-            this.moviesChecked = true;
-            this.seriesChecked = true;
-
         },
         getLang(isoLang) {
             if (flagMap.hasOwnProperty(isoLang)) {
@@ -139,7 +136,9 @@ const app = new Vue({
         },
         onChangeGenre() {
             // INITIAL RESET
-            // this.moviesFiltered = [...this.movieList]
+            this.moviesFiltered = [...this.movieList]
+            console.log(this.movieList)
+            console.log(this.moviesfiltered)
             this.moviesFiltered = this.moviesFiltered.filter((element) => {
                 if (element.genre_ids.length > 0) {
                     if (element.genre_ids.includes(this.selectedGenre)) {
@@ -150,7 +149,7 @@ const app = new Vue({
                 }
             })
             // INITIAL RESET
-            // this.tvSeriesFiltered = [...this.tvSeriesList]
+            this.tvSeriesFiltered = [...this.tvSeriesList]
             this.tvSeriesFiltered = this.tvSeriesFiltered.filter((element) => {
                 if (element.genre_ids.length > 0) {
                     if (element.genre_ids.includes(this.selectedGenre)) {
@@ -173,6 +172,7 @@ const app = new Vue({
         ).then((resp) => {
             console.log(resp.data.results);
             this.moviesFiltered = resp.data.results
+            this.movieList = resp.data.results
         })
         this.getAllGenres('tv', this.genresListTv);
         this.getAllGenres('movie', this.genresListMovie);
