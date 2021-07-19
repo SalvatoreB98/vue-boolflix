@@ -219,7 +219,8 @@ ul.list-container{
 }
 .max-width{
     max-width: 800px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* ANIMATIONS */
 .fa-chevron-right{
