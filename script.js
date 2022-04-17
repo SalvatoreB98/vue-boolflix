@@ -125,10 +125,12 @@ const app = new Vue({
             return Math.round(vote);
         },
         setActiveContent(element) {
+            document.body.style.overflow = 'hidden';
             this.activeContent = element;
             this.isContentOpened = true;
         },
         closeWindow() {
+            document.body.style.overflow = 'auto';
             this.isContentOpened = false
         },
         openCloseFilters() {
